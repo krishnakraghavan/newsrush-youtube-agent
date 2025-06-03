@@ -66,11 +66,29 @@ async function saveVideoToFirestore(video, languageCode = 'en') {
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
     viewCount: 0,
   };
+async function getYouTubeChannels() {
+  const snapshot = await db.collection('youtubeChannels').get();
+  const channels = [];
+
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    if (data.channelId && data.language) {
+      channels.push({
+        name: data.name || data.channelId,
+        id: data.channelId,
+        lang: data.language,
+      });
+    }
+  });
+
+  return channels;
+}
 
   await ref.set(data, { merge: true });
 }
 module.exports = {
   getKeywords,
   saveVideoToFirestore,
+  getYouTubeChannels,
 };
  
