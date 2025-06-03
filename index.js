@@ -1,6 +1,6 @@
 require('dotenv').config();
-const { fetchChannelVideosById } = require('youtubeFetcher');
-const { getKeywords, saveVideoToFirestore, getYouTubeChannels } = require('firestoreService');
+const { fetchChannelVideosById } = require('./youtubeFetcher');
+const { getKeywords, saveVideoToFirestore, getYouTubeChannels } = require('./firestoreService');
 
 (async () => {
   try {
